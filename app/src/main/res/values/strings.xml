@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PartyMeAppFinalVersion</string>
+
+    <string name="activity_splash_loading">Loading...</string>
+
+    <string name="fb_login_protocol_scheme">fb956962284359655</string>
+
+</resources>

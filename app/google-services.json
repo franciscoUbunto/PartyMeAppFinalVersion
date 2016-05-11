@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_number": "531727848691",
+    "project_id": "partymeappfinalversion"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531727848691:android:d74f4e0de2349bae",
+        "android_client_info": {
+          "package_name": "com.partymeappfinalversion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531727848691-ueoik35berl502caklq0hqvmet3mh8n2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.partymeappfinalversion",
+            "certificate_hash": "73800545F1410F8D190D1A691041D8F4984DBAF2"
+          }
+        },
+        {
+          "client_id": "531727848691-gsmcc4lq3eri3064ou7t1rapg1mk2dbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc3t8z13j19ZnSNCnqM75KqmdWX7qS17A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-74580628-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
