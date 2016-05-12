@@ -19,12 +19,18 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.partymeappfinalversion.R;
 
-public class ActivitySignin extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ActivitySignin extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    private static final int RC_SIGN_IN = 9001;
 
     private CallbackManager callbackManager;
     /**
@@ -59,29 +65,105 @@ public class ActivitySignin extends AppCompatActivity implements GoogleApiClient
         initFacebookButton();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         // Create a GoogleApiClient instance
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* current Activity */,
-                        this /* OnConnectionFailedListener */)
-                .addApi(Plus.API)
-                .addScope(Plus.SCOPE_PLUS_LOGIN)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
                 .build();
+        // [END configure_signin]
+
+        // [START build_client]
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        Toast.makeText(ActivitySignin.this, "onConnectionFailed 22", Toast.LENGTH_LONG).show();
+                    }
+                })
+                //.enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(@Nullable Bundle bundle) {
+                        goToActivityGoogle();
+                        Toast.makeText(ActivitySignin.this, "onConnected 22", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+                        Toast.makeText(ActivitySignin.this, "onConnectionSuspended 2", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .build();
+
+        mGoogleApiClient.connect(GoogleApiClient.SIGN_IN_MODE_OPTIONAL);
+//
+//        if(mGoogleApiClient.isConnected()) {
+//            goToActivityGoogle();
+//        }
+
+//        mGoogleApiClient = new GoogleApiClient.Builder(ActivitySignin.this)
+//                //.enableAutoManage(ActivitySignin.this, ActivitySignin.this)
+//                .addApi(Plus.API)
+//                .addScope(Plus.SCOPE_PLUS_LOGIN)
+//                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+//                    @Override
+//                    public void onConnected(@Nullable Bundle bundle) {
+//                        Toast.makeText(ActivitySignin.this, "onConnected 2", Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    @Override
+//                    public void onConnectionSuspended(int i) {
+//                        Toast.makeText(ActivitySignin.this, "onConnectionSuspended 2", Toast.LENGTH_LONG).show();
+//                    }
+//                })
+//                .addOnConnectionFailedListener(ActivitySignin.this)
+//                .build();
+
+        SignInButton googleButton = (SignInButton) findViewById(R.id.sign_in_google);
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+
+//                if (mGoogleApiClient == null) {
+//                    mGoogleApiClient = new GoogleApiClient.Builder(ActivitySignin.this)
+//                            //.enableAutoManage(ActivitySignin.this, ActivitySignin.this)
+//                            .addApi(Plus.API)
+//                            .addScope(Plus.SCOPE_PLUS_LOGIN)
+//                            .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+//                                @Override
+//                                public void onConnected(@Nullable Bundle bundle) {
+//                                    goToActivityGoogle(0;
+//                                    Toast.makeText(ActivitySignin.this, "onConnected", Toast.LENGTH_LONG).show();
+//                                }
+//
+//                                @Override
+//                                public void onConnectionSuspended(int i) {
+//                                    Toast.makeText(ActivitySignin.this, "onConnectionSuspended", Toast.LENGTH_LONG).show();
+//                                }
+//                            })
+//                            .addOnConnectionFailedListener(ActivitySignin.this)
+//                            .build();
+//                }
+//                if(!mGoogleApiClient.isConnected())
+//                    mGoogleApiClient.connect();
+            }
+        });
     }
 
     @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+        if(mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
         super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
     }
 
     private void initFacebookButton() {
@@ -117,21 +199,24 @@ public class ActivitySignin extends AppCompatActivity implements GoogleApiClient
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(result.isSuccess()) {
+                goToActivityGoogle();
+            }
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void goToActivityGoogle(){
+        startActivity(new Intent(ActivitySignin.this, MapsActivityMain.class));
     }
 
     public void loginWithEmail(View button) {
         Toast.makeText(ActivitySignin.this, "login with email", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
     }
 
     @Override
@@ -167,5 +252,7 @@ public class ActivitySignin extends AppCompatActivity implements GoogleApiClient
         }
 
     }*/
+
+
 }
 
