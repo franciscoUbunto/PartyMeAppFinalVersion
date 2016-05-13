@@ -9,9 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
-
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -72,7 +69,11 @@
         <activity
             android:name=".ui.SearchByCategory"
             android:label="@string/title_activity_search_by_category" />
-        <activity android:name=".ui.EventDescription"></activity>
+        <activity android:name=".ui.EventDescription" />
+        <activity
+            android:name=".x"
+            android:label="@string/title_activity_x"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
