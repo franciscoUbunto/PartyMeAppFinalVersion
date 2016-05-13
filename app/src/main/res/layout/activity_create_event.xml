@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/BackToMain"/>/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event Name"
+        android:layout_marginBottom="10dp"/>
+
+
+    <EditText
+        android:id="@+id/emailVar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <CalendarView
+        android:layout_width="117dp"
+        android:layout_height="104dp"
+        android:layout_gravity="right"></CalendarView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_marginBottom="10dp"/>
+
+
+    <TimePicker
+        android:id="@+id/start"
+        android:layout_width="25dp"
+        android:layout_height="25dp" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Create Event"
+        android:id="@+id/createEvent" />
+
+</LinearLayout>
+

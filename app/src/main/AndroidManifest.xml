@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -44,7 +50,6 @@
         <activity android:name=".ui.Logged" />
         <activity android:name=".ui.NativeLogin" />
         <activity android:name=".ui.Register" />
-        <activity android:name=".ui.MainScreen" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,7 +64,15 @@
 
         <activity
             android:name=".ui.MapsActivityMain"
-            android:label="@string/title_activity_maps_activity_main"></activity>
+            android:label="@string/title_activity_maps_activity_main" />
+        <activity
+            android:name=".ui.WhatsIsOn"
+            android:label="@string/title_activity_whats_is_on" />
+        <activity android:name=".ui.CreateEvent" />
+        <activity
+            android:name=".ui.SearchByCategory"
+            android:label="@string/title_activity_search_by_category" />
+        <activity android:name=".ui.EventDescription"></activity>
     </application>
 
 </manifest>

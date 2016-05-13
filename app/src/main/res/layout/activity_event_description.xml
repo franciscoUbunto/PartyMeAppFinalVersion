@@ -1,9 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff0000">
+    android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/backToMain"/>/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EVENT DESCRIPTION"
+        android:id="@+id/eventDescription" />
 
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,25 +33,13 @@
         android:layout_gravity="center"
         android:gravity="center">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Whats Is ON"
-            android:id="@+id/WhatIsON"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Creat Event"
-            android:id="@+id/CreatEvent"/>
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search By Category"
-            android:id="@+id/searchByCategory"/>/>
 
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET DIRECTION"
+        android:id="@+id/getDirection"/>/>
 
 </LinearLayout>

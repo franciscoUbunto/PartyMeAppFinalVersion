@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="back"
+        android:id="@+id/backToMain"/>/>
+
+    <Spinner
+        android:contentDescription="Search By Category"
+        android:spinnerMode="dropdown"
+        android:id="@+id/dropDown"
+        android:layout_width="match_parent"
+        android:layout_height="20pt">
+
+    </Spinner>
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:background="#ff0000"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:weightSum="1">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="10pt"
+            android:orientation="vertical"
+            android:layout_marginLeft="-140dp"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="EVENT TITLE"
+            android:id="@+id/eventTitle"/>
+
+        <ViewFlipper
+            android:layout_width="130pt"
+            android:layout_height="match_parent"
+            android:id="@+id/mySlide">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/image2"
+                android:scaleType="center"
+                android:src="@drawable/church"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/image3"
+                android:scaleType="center"
+                android:src="@drawable/forro"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/image4"
+                android:scaleType="center"
+                android:src="@drawable/theater"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/image1"
+                android:scaleType="center"
+                android:src="@drawable/templebar"/>
+
+        </ViewFlipper>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="20pt"
+        android:layout_height="50dp"
+        android:text="next"
+        android:background="@color/com_facebook_blue"
+        android:id="@+id/next"
+        android:layout_gravity="left" />
+    <Button
+        android:layout_width="20pt"
+        android:layout_height="50dp"
+        android:text="prev"
+        android:background="@color/com_facebook_blue"
+        android:id="@+id/prev"
+        android:layout_marginTop="-50dp"
+        android:layout_gravity="right" />
+
+
+</LinearLayout>
